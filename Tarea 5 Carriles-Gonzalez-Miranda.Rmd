@@ -1,19 +1,409 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Tarea 5 Carriles-Gonzalez-Miranda"
+output: html_document
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
-
-```{r}
-plot(cars)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+```{r}
+library(RJSONIO)
+library(tidyverse)
+library(dplyr)
+library(gridExtra)
+library(ggplot2)
+library(ggthemes)
+library(tidyquant)
+library(forcats)
+library(lubridate)
+library(quantmod)
+library(ggnetwork)
+```
+#PREGUNTA 2
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+1.
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+```{r}
+microsoft <- tq_get("MSFT",
+                    get = "stock.prices",
+                    from = "2000-01-01",
+                    to = "2018-08-31",
+                    periodicity = "monthly")
+
+apple <- tq_get("AAPL",
+                get = "stock.prices",
+                from = "2000-01-01",
+                to = "2018-08-31",
+                periodicity = "monthly")
+```
+
+2.A
+
+```{r}
+
+##retornos microsoft
+
+retornos_microsoft <- function(x) {
+  adjusted <- x$adjusted 
+  log_adjusted_micro = diff(log(adjusted), lag = 1)
+  return(log_adjusted_micro)
+}
+retornos_microsoft(microsoft)
+
+microsoft$RETORNOS_M <-rbind.data.frame(0,data.frame(retornos_microsoft(microsoft)))
+
+MICROSOFT = microsoft %>% select(date,RETORNOS_M)
+
+#retornos apple
+ 
+  retornos_apple <- function(x) {
+    adjusted <- x$adjusted 
+    log_adjusted_apple = diff(log(adjusted),lag = 1)
+    return(log_adjusted_apple)
+  }
+  retornos_apple(apple)
+  
+  apple$RETORNOS_A <-rbind.data.frame(0,data.frame(retornos_apple(apple)))
+  
+ APPLE = apple %>% select(date, RETORNOS_A) 
+ 
+ 
+ 
+ 
+ 
+```
+
+2.B
+
+```{r}
+
+g_r_microsoft <- ggplot(MICROSOFT) + geom_line(aes(date,RETORNOS_M), color = "darkblue") + 
+  labs(title = "Retornos mensuales Microsoft", subtitle = "Enero 2010 a Agosto 2018") +
+  theme_tq() + scale_color_tq() + 
+  xlab("Periodo") + ylab("Retorno")
+g_r_microsoft
+```
+
+
+```{r}
+
+
+```
+
+
+2.C
+
+```{r}
+
+```
+
+
+#PREGUNTA 3
+
+En este caso, el sesgo si se presenta y no disminuye al aumentar la muestra, es decir, este estimador es sesgado e inconsistente al aumento en el tamaño de la muestra por lo que no seria un buen estimador debido a que en la regresion se omite una variable relevante que causa el preoblema mencionado anterirmete. Manteniendo la estimacion sesgada casi constante, como es el caso de un tamaño de muestra 50, el estimador toma el valor de 3.224019, en comparacion con el valor que toma con un tamaño de muestra 1000 que es de 3.300529, notandese claramente una poca variacion.
+
+Desde X1 hasta X4 se encuentran los valores del estimador b1 SESGADO con tamaños de muestra 50, 100, 500 y 1000 respectivamente. Al mismo tiempo desde X5 hasta X8 son los valores que toma el estimador b1 INSESGADO para sus respectivos tamaños de muestra, en el mismo orden que el estimador sesgado.
+
+Tomando el valor 2.500462  cuando este es insesgado, es decir, estimado considerando la variable omitida, en comparacion con el valor 3.300529 sesgado positivamente que toma el estimador al omitir la variable. Se aprecia una diferencia significativa al estimarlo con un tamaño de muestra 1000, al igual que con los otros tamaños de la muestra.
+
+
+3.A
+
+```{r}
+set.seed(1234)
+Rep = 10000
+betas = matrix(NA ,nrow = Rep, ncol = 8)
+
+b0 = 2
+b1 = 2.5
+b2 = 1
+
+N = c(50, 100, 500, 1000)
+
+for (j in 1:length(N)){
+  x1 = rnorm(N[j],20,1)
+  x2 = (0.8*x1) + rnorm(N[j],0,1)
+  x2.2 = runif(N[j],0,1)
+
+  for (i in 1:Rep) {
+    
+    u = rnorm(N[j],0,1)
+    v = b2*x2 + u
+    
+    Y_CON_SESGO = b0 + b1*x1 + v
+    
+    Y_SIN_SESGO = b0 + b1*x1 + b2*x2 + u
+    
+    REGRESION_CON_SESGO = lm(Y_CON_SESGO ~ x1)
+    
+    betas[i,j] = REGRESION_CON_SESGO$coef[2]
+
+    
+    REGRESION_SIN_SESGO = lm(Y_SIN_SESGO ~ x1 + x2)
+    
+    betas[i,j+4] = REGRESION_SIN_SESGO$coef[2]
+ 
+  }
+}
+
+betas_data = data.frame(betas)
+
+apply(betas_data, 2, mean)
+
+```
+
+Ahora calculamos la varianza para obtener la varianza de b1
+
+```{r}
+apply(betas_data, 2, var)
+```
+
+
+3.B
+
+```{r}
+REG_50_SESGO = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,1],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,1]), sd=sd(betas_data[,1])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador b1 CON SESGO con N=50") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_50_SESGO
+```
+
+```{r}
+
+REG_50_SS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,5],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,5]), sd=sd(betas_data[,5])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador SIN SESGO b1 con N=50") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_50_SS
+```
+
+
+```{r}
+REG_100_CS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,2],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,2]), sd=sd(betas_data[,2])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador CON SESGO b1 con N=100") +xlab("Estimador b1") +
+  theme_economist_white()
+
+
+REG_100_CS
+```
+
+```{r}
+REG_100_SS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,6],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,6]), sd=sd(betas_data[,6])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador SIN SESGO b1 con N=100") +xlab("Estimador b1") +
+  theme_economist_white()
+
+
+REG_100_SS
+```
+
+
+
+```{r}
+REG_500_CS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,3],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,3]), sd=sd(betas_data[,3])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador CON SESGO b1 con N=500") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_500_CS
+```
+
+```{r}
+REG_500_SS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,7],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,7]), sd=sd(betas_data[,7])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador SIN SESGO b1 con N=500") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_500_SS
+```
+
+
+```{r}
+REG_1000_CS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,4],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,4]), sd=sd(betas_data[,4])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") +ggtitle("Distribucion del estimador CON SESGO b1 con N=1000") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_1000_CS
+```
+
+```{r}
+REG_1000_SS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,8],y=..density..), col="black", bins = 25) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,8]), sd=sd(betas_data[,8])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") +ggtitle("Distribucion del estimador SIN SESGO b1 con N=1000") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_1000_SS
+```
+
+3.C
+
+En el caso que x2 ∼ U [0, 1] ambos modelos, tanto el correctamente especificado como el que mantiene una variable omitida relevante, convergen al valor poblacional de 2.5, por lo que con este tipo de distribucion se podria concluir que los resultados no presentan sesgo a simple vista.
+
+```{r}
+set.seed(1234)
+Rep = 10000
+betas = matrix(NA ,nrow = Rep, ncol = 8)
+
+b0 = 2
+b1 = 2.5
+b2 = 1
+
+N = c(50, 100, 500, 1000)
+
+for (j in 1:length(N)){
+  x1 = rnorm(N[j],20,1)
+  x2 = runif(N[j],0,1)
+  x2.2 = (0.8*x1) + rnorm(N[j],0,1)
+
+  for (i in 1:Rep) {
+    
+    u = rnorm(N[j],0,1)
+    v = b2*x2 + u
+    
+    Y_CON_SESGO = b0 + b1*x1 + v
+    
+    Y_SIN_SESGO = b0 + b1*x1 + b2*x2 + u
+    
+    REGRESION_CON_SESGO = lm(Y_CON_SESGO ~ x1)
+    
+    betas[i,j] = REGRESION_CON_SESGO$coef[2]
+
+    
+    REGRESION_SIN_SESGO = lm(Y_SIN_SESGO ~ x1 + x2)
+    
+    betas[i,j+4] = REGRESION_SIN_SESGO$coef[2]
+ 
+  }
+}
+
+betas_data_unif = data.frame(betas)
+
+apply(betas_data_unif, 2, mean)
+```
+
+```{r}
+apply(betas_data_unif, 2, var)
+```
+
+GRAFICOS CON x2 ∼ U [0, 1]
+
+Por el lado de los graficos, estos muestran que la media del coeficiente b1 se encuentra más centrado en 2.5, para todos los tamaños de la muestra. Alternativamente, las varianzas de las estimasiones sesgadas se mantienen constantes en su totalidas, sin existir variacion alguna.
+
+```{r}
+REG_U_50_CS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,1],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,1]), sd=sd(betas_data_unif[,1])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador CON SESGO b1 con N=50", subtitle ="con  x2 ∼ U [0, 1]") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_U_50_CS
+```
+
+```{r}
+REG_U_50_SS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,5],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,5]), sd=sd(betas_data_unif[,5])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador SIN SESGO b1 con N=50", subtitle ="con  x2 ∼ U [0, 1]") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_U_50_SS
+```
+
+```{r}
+REG_U_100_CS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,2],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,2]), sd=sd(betas_data_unif[,2])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador CON SESGO b1 con N=100", subtitle ="con  x2 ∼ U [0, 1]") +xlab("Estimador b1") +
+  theme_economist_white()
+
+
+REG_U_100_CS
+```
+
+```{r}
+REG_U_100_SS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,6],y=..density..), col="black", bins = 25) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,6]), sd=sd(betas_data_unif[,6])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador SIN SESGO b1 con N=100", subtitle ="con  x2 ∼ U [0, 1]") +xlab("Estimador b1") +
+  theme_economist_white()
+
+
+REG_U_100_SS
+```
+
+
+```{r}
+REG_U_500_CS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,3],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,3]), sd=sd(betas_data_unif[,3])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador CON SESGO b1 con N=500", subtitle ="con  x2 ∼ U [0, 1]") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_U_500_CS
+```
+
+```{r}
+REG_U_500_SS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,7],y=..density..), col="black", bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,7]), sd=sd(betas_data_unif[,7])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") + ggtitle("Distribucion del estimador SIN SESGO b1 con N=500", subtitle ="con  x2 ∼ U [0, 1]") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_U_500_SS
+
+```
+
+```{r}
+REG_U_1000_CS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,4],y=..density..), col="black", bins = 25) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,4]), sd=sd(betas_data_unif[,4])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") +ggtitle("Distribucion del estimador CON SESGO b1 con N=1000", subtitle ="con  x2 ∼ U [0, 1]") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_U_1000_CS
+```
+
+```{r}
+REG_U_1000_SS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,8],y=..density..), col="black", bins = 25) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,8]), sd=sd(betas_data_unif[,8])),
+                geom = "line", color="red", size=1) +
+  ylab("Densidad") +ggtitle("Distribucion del estimador SIN SESGO b1 con N=1000", subtitle ="con  x2 ∼ U [0, 1]") +xlab("Estimador b1") +
+  theme_economist_white()
+
+REG_U_1000_SS
+```
+
+
+
+
 
