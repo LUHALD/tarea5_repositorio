@@ -1669,7 +1669,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("Tarea 5 Carriles-Gonzalez-Miranda.Rmd");
+  window.initializeSourceEmbed("Tarea 5 Carriles-Gonzalez-Miranda.nb.html");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
@@ -1698,13 +1698,7 @@ $(document).ready(function () {
 </div>
 
 
-<!-- rnb-text-begin -->
-<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a> Notebook. When you execute code within the notebook, the results appear beneath the code.</p>
-<p>Try executing this chunk by clicking the <em>Run</em> button within the chunk or by placing your cursor inside it and pressing <em>Cmd+Shift+Enter</em>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShSSlNPTklPKVxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KGRwbHlyKVxubGlicmFyeShncmlkRXh0cmEpXG5saWJyYXJ5KGdncGxvdDIpXG5saWJyYXJ5KGdndGhlbWVzKVxubGlicmFyeSh0aWR5cXVhbnQpXG5saWJyYXJ5KGZvcmNhdHMpXG5saWJyYXJ5KGx1YnJpZGF0ZSlcbmxpYnJhcnkocXVhbnRtb2QpXG5gYGAifQ== -->
-<pre class="r"><code>library(RJSONIO)
+<pre class="{r}"><code>library(RJSONIO)
 library(tidyverse)
 library(dplyr)
 library(gridExtra)
@@ -1714,15 +1708,340 @@ library(tidyquant)
 library(forcats)
 library(lubridate)
 library(quantmod)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Cmd+Option+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Cmd+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.</p>
-<!-- rnb-text-end -->
+<p>#PREGUNTA 2</p>
+<ol style="list-style-type: decimal">
+<li></li>
+</ol>
+<pre class="{r}"><code>acciones&lt;- tq_get(c(&quot;MSFT&quot;,&quot;AAPL&quot;),
+                       get = &quot;stock.prices&quot;,
+                       from = &quot;2000-01-01&quot;,
+                       to  = &quot;2018-08-30&quot;,
+                       periodicity = &quot;monthly&quot;)</code></pre>
+<p>2.A</p>
+<pre class="{r}"><code>function_finance = function(x,return=c('yes','no'),graph=c('type 1','type 2'),norm=c('yes','no')){
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBpcyBhbiBbUiBNYXJrZG93bl0oaHR0cDovL3JtYXJrZG93bi5yc3R1ZGlvLmNvbSkgTm90ZWJvb2suIFdoZW4geW91IGV4ZWN1dGUgY29kZSB3aXRoaW4gdGhlIG5vdGVib29rLCB0aGUgcmVzdWx0cyBhcHBlYXIgYmVuZWF0aCB0aGUgY29kZS4gCgpUcnkgZXhlY3V0aW5nIHRoaXMgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpSdW4qIGJ1dHRvbiB3aXRoaW4gdGhlIGNodW5rIG9yIGJ5IHBsYWNpbmcgeW91ciBjdXJzb3IgaW5zaWRlIGl0IGFuZCBwcmVzc2luZyAqQ21kK1NoaWZ0K0VudGVyKi4gCgpgYGB7cn0KcGxvdChjYXJzKQpgYGAKCkFkZCBhIG5ldyBjaHVuayBieSBjbGlja2luZyB0aGUgKkluc2VydCBDaHVuayogYnV0dG9uIG9uIHRoZSB0b29sYmFyIG9yIGJ5IHByZXNzaW5nICpDbWQrT3B0aW9uK0kqLgoKV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDbWQrU2hpZnQrSyogdG8gcHJldmlldyB0aGUgSFRNTCBmaWxlKS4gCgpUaGUgcHJldmlldyBzaG93cyB5b3UgYSByZW5kZXJlZCBIVE1MIGNvcHkgb2YgdGhlIGNvbnRlbnRzIG9mIHRoZSBlZGl0b3IuIENvbnNlcXVlbnRseSwgdW5saWtlICpLbml0KiwgKlByZXZpZXcqIGRvZXMgbm90IHJ1biBhbnkgUiBjb2RlIGNodW5rcy4gSW5zdGVhZCwgdGhlIG91dHB1dCBvZiB0aGUgY2h1bmsgd2hlbiBpdCB3YXMgbGFzdCBydW4gaW4gdGhlIGVkaXRvciBpcyBkaXNwbGF5ZWQuCgo=</div>
+  #En el caso que los retornos sean logaritmicos 
+  
+  if (return=='yes'){
+   
+    retornos_logaritmicos &lt;- x %&gt;%
+      group_by(symbol) %&gt;%
+      tq_transmute(select = adjusted,
+                   mutate_fun = periodReturn,
+                   period = &quot;monthly&quot;,
+                   type = &quot;log&quot;,
+                   col_rename = &quot;r&quot;)
+    
+
+    ifelse(graph=='type 1',
+           (grafico_log &lt;- retornos_logaritmicos %&gt;%
+              ggplot(aes(date, r))+
+              geom_line() +
+              labs(title = &quot;Retornos Activos&quot;,
+                   x = &quot;Retornos mensuales&quot;, y = &quot;Densidad&quot;) +
+              theme_economist_white() +
+              facet_wrap(~ symbol, ncol = 2)),
+           ifelse(graph=='type 2',
+                  (grafico_acumulado_log &lt;- retornos_logaritmicos %&gt;%
+                     group_by(symbol) %&gt;%
+                     mutate(acumulado = cumsum(r))  %&gt;%
+                     ggplot(aes(date,acumulado)) +
+                     geom_line() +
+                     labs(title = &quot;Retornos Activos&quot;,
+                          x = &quot;Periodo&quot;, y = &quot;Retorno Acumulado&quot;) +
+                     theme_economist() +
+                     facet_wrap(~ symbol, ncol = 2) +
+                     scale_y_continuous())))
+    
+    #Test Normalidad 
+    #H0:normalidad, H1:no normalidad
+    
+    if(norm=='yes'){
+      jb_log = by(retornos_logaritmicos,retornos_logaritmicos$symbol,
+                 function(x){
+                   n=length(x$r)
+                   mean = sum(x$r)/n
+                   skewness = ((sum(x$r-mean)^3)/n)/((sum(x$r-mean)^2)/n)^(3/2)
+                   kurtosis = ((sum(x$r-mean)^4)/n)/((sum(x$r-mean)^2)/n)^(2)
+                   JB = n*(((skewness^2)/6)+(((kurtosis-3)^2)/24))
+                   test = paste('p-value =',1 - pchisq(JB,df = 2),ifelse(1 - pchisq(JB,df = 2)&lt;0.05,
+                                                                      ', Se rechaza H0',
+                                                                      ', No se rechaza H0'))
+                   
+                 }
+      )
+    }
+  }
+  #En el caso de que los retornos sean aritmeticos 
+  else if (return=='no'){
+
+    retornos_aritmeticos &lt;- x %&gt;%
+      group_by(symbol) %&gt;%
+      tq_transmute(select = adjusted,
+                   mutate_fun = periodReturn,
+                   period = &quot;monthly&quot;,
+                   type = &quot;arithmetic&quot;,
+                   col_rename = &quot;re&quot;)
+    
+    ifelse(graph=='type 1',
+           (grafico_aritmetico &lt;- retornos_aritmeticos %&gt;%
+              ggplot(aes(date,re))+
+              geom_line() +
+              labs(title = &quot;Retornos Activos&quot;,
+                   x = &quot;Retornos mensuales&quot;, y = &quot;Densidad&quot;) +
+              theme_economist_white() +
+              facet_wrap(~ symbol, ncol = 2)))
+    ifelse(graph=='type 2',
+                  (grafico_acumulado_aritmetico &lt;- retornos_aritmeticos %&gt;%
+                     group_by(symbol) %&gt;%
+                     mutate(acumulado = cumsum(re))  %&gt;%
+                     ggplot(aes(date, acumulado)) +
+                     geom_line() +
+                     labs(title = &quot;Retornos Activos&quot;,
+                          x = &quot;Periodo&quot;, y = &quot;Retorno Acumulado&quot;) +
+                     theme_economist() +
+                     facet_wrap(~ symbol, ncol = 2) +
+                     scale_y_continuous()))
+    
+  }
+ 
+  ifelse(return==&quot;yes&quot;&amp; graph=='type 1' &amp; norm==&quot;yes&quot;,return(list(grafico_log,jb_log)),
+         ifelse(return=='yes' &amp; graph=='type 2' &amp; norm==&quot;yes&quot;,return(list(grafico_acumulado_log,jb_log))))
+  
+  
+}
+
+function_finance(acciones,&quot;yes&quot;,&quot;type 1&quot;,&quot;yes&quot;)
+ 
+ </code></pre>
+<p>#PREGUNTA 3</p>
+<p>En este caso, el sesgo si se presenta y no disminuye al aumentar la muestra, es decir, este estimador es sesgado e inconsistente al aumento en el tamaño de la muestra por lo que no seria un buen estimador debido a que en la regresion se omite una variable relevante que causa el preoblema mencionado anterirmete. Manteniendo la estimacion sesgada casi constante, como es el caso de un tamaño de muestra 50, el estimador toma el valor de 3.224019, en comparacion con el valor que toma con un tamaño de muestra 1000 que es de 3.300529, notandese claramente una poca variacion.</p>
+<p>Desde X1 hasta X4 se encuentran los valores del estimador b1 SESGADO con tamaños de muestra 50, 100, 500 y 1000 respectivamente. Al mismo tiempo desde X5 hasta X8 son los valores que toma el estimador b1 INSESGADO para sus respectivos tamaños de muestra, en el mismo orden que el estimador sesgado.</p>
+<p>Tomando el valor 2.500462 cuando este es insesgado, es decir, estimado considerando la variable omitida, en comparacion con el valor 3.300529 sesgado positivamente que toma el estimador al omitir la variable. Se aprecia una diferencia significativa al estimarlo con un tamaño de muestra 1000, al igual que con los otros tamaños de la muestra.</p>
+<p>3.A</p>
+<pre class="{r}"><code>set.seed(1234)
+Rep = 10000
+betas = matrix(NA ,nrow = Rep, ncol = 8)
+
+b0 = 2
+b1 = 2.5
+b2 = 1
+
+N = c(50, 100, 500, 1000)
+
+for (j in 1:length(N)){
+  x1 = rnorm(N[j],20,1)
+  x2 = (0.8*x1) + rnorm(N[j],0,1)
+  x2.2 = runif(N[j],0,1)
+
+  for (i in 1:Rep) {
+    
+    u = rnorm(N[j],0,1)
+    v = b2*x2 + u
+    
+    Y_CON_SESGO = b0 + b1*x1 + v
+    
+    Y_SIN_SESGO = b0 + b1*x1 + b2*x2 + u
+    
+    REGRESION_CON_SESGO = lm(Y_CON_SESGO ~ x1)
+    
+    betas[i,j] = REGRESION_CON_SESGO$coef[2]
+
+    
+    REGRESION_SIN_SESGO = lm(Y_SIN_SESGO ~ x1 + x2)
+    
+    betas[i,j+4] = REGRESION_SIN_SESGO$coef[2]
+ 
+  }
+}
+
+betas_data = data.frame(betas)
+
+apply(betas_data, 2, mean)
+</code></pre>
+<p>#VARIANZAS</p>
+<pre class="{r}"><code>apply(betas_data, 2, var)</code></pre>
+<p>3.B</p>
+<pre class="{r}"><code>REG_50_SESGO = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,1],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,1]), sd=sd(betas_data[,1])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador b1 CON SESGO con N=50&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_50_SESGO
+</code></pre>
+<pre class="{r}"><code>REG_50_SS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,5],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,5]), sd=sd(betas_data[,5])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador SIN SESGO b1 con N=50&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_50_SS</code></pre>
+<pre class="{r}"><code>REG_100_CS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,2],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,2]), sd=sd(betas_data[,2])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador CON SESGO b1 con N=100&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+
+REG_100_CS</code></pre>
+<pre class="{r}"><code>REG_100_SS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,6],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,6]), sd=sd(betas_data[,6])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador SIN SESGO b1 con N=100&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+
+REG_100_SS</code></pre>
+<pre class="{r}"><code>REG_500_CS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,3],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,3]), sd=sd(betas_data[,3])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador CON SESGO b1 con N=500&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_500_CS</code></pre>
+<pre class="{r}"><code>REG_500_SS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,7],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,7]), sd=sd(betas_data[,7])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador SIN SESGO b1 con N=500&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_500_SS</code></pre>
+<pre class="{r}"><code>REG_1000_CS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,4],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,4]), sd=sd(betas_data[,4])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) +ggtitle(&quot;Distribucion del estimador CON SESGO b1 con N=1000&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_1000_CS</code></pre>
+<pre class="{r}"><code>REG_1000_SS = ggplot(betas_data) + 
+  geom_histogram(aes(betas_data[,8],y=..density..), col=&quot;black&quot;, bins = 25) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data[,8]), sd=sd(betas_data[,8])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) +ggtitle(&quot;Distribucion del estimador SIN SESGO b1 con N=1000&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_1000_SS</code></pre>
+<p>3.C</p>
+<p>En el caso que x2 ∼ U [0, 1] ambos modelos, tanto el correctamente especificado como el que mantiene una variable omitida relevante, convergen al valor poblacional de 2.5, por lo que con este tipo de distribucion se podria concluir que los resultados no presentan sesgo a simple vista.</p>
+<pre class="{r}"><code>set.seed(1234)
+Rep = 10000
+betas = matrix(NA ,nrow = Rep, ncol = 8)
+
+b0 = 2
+b1 = 2.5
+b2 = 1
+
+N = c(50, 100, 500, 1000)
+
+for (j in 1:length(N)){
+  x1 = rnorm(N[j],20,1)
+  x2 = runif(N[j],0,1)
+  x2.2 = (0.8*x1) + rnorm(N[j],0,1)
+
+  for (i in 1:Rep) {
+    
+    u = rnorm(N[j],0,1)
+    v = b2*x2 + u
+    
+    Y_CON_SESGO = b0 + b1*x1 + v
+    
+    Y_SIN_SESGO = b0 + b1*x1 + b2*x2 + u
+    
+    REGRESION_CON_SESGO = lm(Y_CON_SESGO ~ x1)
+    
+    betas[i,j] = REGRESION_CON_SESGO$coef[2]
+
+    
+    REGRESION_SIN_SESGO = lm(Y_SIN_SESGO ~ x1 + x2)
+    
+    betas[i,j+4] = REGRESION_SIN_SESGO$coef[2]
+ 
+  }
+}
+
+betas_data_unif = data.frame(betas)
+
+apply(betas_data_unif, 2, mean)</code></pre>
+<pre class="{r}"><code>apply(betas_data_unif, 2, var)</code></pre>
+<p>GRAFICOS CON x2 ∼ U [0, 1]</p>
+<p>Por el lado de los graficos, estos muestran que la media del coeficiente b1 se encuentra más centrado en 2.5, para todos los tamaños de la muestra. Alternativamente, las varianzas de las estimasiones sesgadas se mantienen constantes en su totalidas, sin existir variacion alguna.</p>
+<pre class="{r}"><code>REG_U_50_CS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,1],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,1]), sd=sd(betas_data_unif[,1])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador CON SESGO b1 con N=50&quot;, subtitle =&quot;con  x2 ∼ U [0, 1]&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_U_50_CS</code></pre>
+<pre class="{r}"><code>REG_U_50_SS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,5],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,5]), sd=sd(betas_data_unif[,5])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador SIN SESGO b1 con N=50&quot;, subtitle =&quot;con  x2 ∼ U [0, 1]&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_U_50_SS</code></pre>
+<pre class="{r}"><code>REG_U_100_CS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,2],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,2]), sd=sd(betas_data_unif[,2])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador CON SESGO b1 con N=100&quot;, subtitle =&quot;con  x2 ∼ U [0, 1]&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+
+REG_U_100_CS</code></pre>
+<pre class="{r}"><code>REG_U_100_SS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,6],y=..density..), col=&quot;black&quot;, bins = 25) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,6]), sd=sd(betas_data_unif[,6])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador SIN SESGO b1 con N=100&quot;, subtitle =&quot;con  x2 ∼ U [0, 1]&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+
+REG_U_100_SS</code></pre>
+<pre class="{r}"><code>REG_U_500_CS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,3],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,3]), sd=sd(betas_data_unif[,3])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador CON SESGO b1 con N=500&quot;, subtitle =&quot;con  x2 ∼ U [0, 1]&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_U_500_CS</code></pre>
+<pre class="{r}"><code>REG_U_500_SS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,7],y=..density..), col=&quot;black&quot;, bins = 30) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,7]), sd=sd(betas_data_unif[,7])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) + ggtitle(&quot;Distribucion del estimador SIN SESGO b1 con N=500&quot;, subtitle =&quot;con  x2 ∼ U [0, 1]&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_U_500_SS
+</code></pre>
+<pre class="{r}"><code>REG_U_1000_CS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,4],y=..density..), col=&quot;black&quot;, bins = 25) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,4]), sd=sd(betas_data_unif[,4])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) +ggtitle(&quot;Distribucion del estimador CON SESGO b1 con N=1000&quot;, subtitle =&quot;con  x2 ∼ U [0, 1]&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_U_1000_CS</code></pre>
+<pre class="{r}"><code>REG_U_1000_SS = ggplot(betas_data_unif) + 
+  geom_histogram(aes(betas_data_unif[,8],y=..density..), col=&quot;black&quot;, bins = 25) +
+  stat_function(fun = dnorm, args = list(mean=mean(betas_data_unif[,8]), sd=sd(betas_data_unif[,8])),
+                geom = &quot;line&quot;, color=&quot;red&quot;, size=1) +
+  ylab(&quot;Densidad&quot;) +ggtitle(&quot;Distribucion del estimador SIN SESGO b1 con N=1000&quot;, subtitle =&quot;con  x2 ∼ U [0, 1]&quot;) +xlab(&quot;Estimador b1&quot;) +
+  theme_economist_white()
+
+REG_U_1000_SS</code></pre>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCmBgYHtyfQpsaWJyYXJ5KFJKU09OSU8pCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGRwbHlyKQpsaWJyYXJ5KGdyaWRFeHRyYSkKbGlicmFyeShnZ3Bsb3QyKQpsaWJyYXJ5KGdndGhlbWVzKQpsaWJyYXJ5KHRpZHlxdWFudCkKbGlicmFyeShmb3JjYXRzKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShxdWFudG1vZCkKYGBgCiNQUkVHVU5UQSAyCgoxLgpgYGB7cn0KYWNjaW9uZXM8LSB0cV9nZXQoYygiTVNGVCIsIkFBUEwiKSwKICAgICAgICAgICAgICAgICAgICAgICBnZXQgPSAic3RvY2sucHJpY2VzIiwKICAgICAgICAgICAgICAgICAgICAgICBmcm9tID0gIjIwMDAtMDEtMDEiLAogICAgICAgICAgICAgICAgICAgICAgIHRvICA9ICIyMDE4LTA4LTMwIiwKICAgICAgICAgICAgICAgICAgICAgICBwZXJpb2RpY2l0eSA9ICJtb250aGx5IikKYGBgCgoyLkEKYGBge3J9CmZ1bmN0aW9uX2ZpbmFuY2UgPSBmdW5jdGlvbih4LHJldHVybj1jKCd5ZXMnLCdubycpLGdyYXBoPWMoJ3R5cGUgMScsJ3R5cGUgMicpLG5vcm09YygneWVzJywnbm8nKSl7CgogICNFbiBlbCBjYXNvIHF1ZSBsb3MgcmV0b3Jub3Mgc2VhbiBsb2dhcml0bWljb3MgCiAgCiAgaWYgKHJldHVybj09J3llcycpewogICAKICAgIHJldG9ybm9zX2xvZ2FyaXRtaWNvcyA8LSB4ICU+JQogICAgICBncm91cF9ieShzeW1ib2wpICU+JQogICAgICB0cV90cmFuc211dGUoc2VsZWN0ID0gYWRqdXN0ZWQsCiAgICAgICAgICAgICAgICAgICBtdXRhdGVfZnVuID0gcGVyaW9kUmV0dXJuLAogICAgICAgICAgICAgICAgICAgcGVyaW9kID0gIm1vbnRobHkiLAogICAgICAgICAgICAgICAgICAgdHlwZSA9ICJsb2ciLAogICAgICAgICAgICAgICAgICAgY29sX3JlbmFtZSA9ICJyIikKICAgIAoKICAgIGlmZWxzZShncmFwaD09J3R5cGUgMScsCiAgICAgICAgICAgKGdyYWZpY29fbG9nIDwtIHJldG9ybm9zX2xvZ2FyaXRtaWNvcyAlPiUKICAgICAgICAgICAgICBnZ3Bsb3QoYWVzKGRhdGUsIHIpKSsKICAgICAgICAgICAgICBnZW9tX2xpbmUoKSArCiAgICAgICAgICAgICAgbGFicyh0aXRsZSA9ICJSZXRvcm5vcyBBY3Rpdm9zIiwKICAgICAgICAgICAgICAgICAgIHggPSAiUmV0b3Jub3MgbWVuc3VhbGVzIiwgeSA9ICJEZW5zaWRhZCIpICsKICAgICAgICAgICAgICB0aGVtZV9lY29ub21pc3Rfd2hpdGUoKSArCiAgICAgICAgICAgICAgZmFjZXRfd3JhcCh+IHN5bWJvbCwgbmNvbCA9IDIpKSwKICAgICAgICAgICBpZmVsc2UoZ3JhcGg9PSd0eXBlIDInLAogICAgICAgICAgICAgICAgICAoZ3JhZmljb19hY3VtdWxhZG9fbG9nIDwtIHJldG9ybm9zX2xvZ2FyaXRtaWNvcyAlPiUKICAgICAgICAgICAgICAgICAgICAgZ3JvdXBfYnkoc3ltYm9sKSAlPiUKICAgICAgICAgICAgICAgICAgICAgbXV0YXRlKGFjdW11bGFkbyA9IGN1bXN1bShyKSkgICU+JQogICAgICAgICAgICAgICAgICAgICBnZ3Bsb3QoYWVzKGRhdGUsYWN1bXVsYWRvKSkgKwogICAgICAgICAgICAgICAgICAgICBnZW9tX2xpbmUoKSArCiAgICAgICAgICAgICAgICAgICAgIGxhYnModGl0bGUgPSAiUmV0b3Jub3MgQWN0aXZvcyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgeCA9ICJQZXJpb2RvIiwgeSA9ICJSZXRvcm5vIEFjdW11bGFkbyIpICsKICAgICAgICAgICAgICAgICAgICAgdGhlbWVfZWNvbm9taXN0KCkgKwogICAgICAgICAgICAgICAgICAgICBmYWNldF93cmFwKH4gc3ltYm9sLCBuY29sID0gMikgKwogICAgICAgICAgICAgICAgICAgICBzY2FsZV95X2NvbnRpbnVvdXMoKSkpKQogICAgCiAgICAjVGVzdCBOb3JtYWxpZGFkIAogICAgI0gwOm5vcm1hbGlkYWQsIEgxOm5vIG5vcm1hbGlkYWQKICAgIAogICAgaWYobm9ybT09J3llcycpewogICAgICBqYl9sb2cgPSBieShyZXRvcm5vc19sb2dhcml0bWljb3MscmV0b3Jub3NfbG9nYXJpdG1pY29zJHN5bWJvbCwKICAgICAgICAgICAgICAgICBmdW5jdGlvbih4KXsKICAgICAgICAgICAgICAgICAgIG49bGVuZ3RoKHgkcikKICAgICAgICAgICAgICAgICAgIG1lYW4gPSBzdW0oeCRyKS9uCiAgICAgICAgICAgICAgICAgICBza2V3bmVzcyA9ICgoc3VtKHgkci1tZWFuKV4zKS9uKS8oKHN1bSh4JHItbWVhbileMikvbileKDMvMikKICAgICAgICAgICAgICAgICAgIGt1cnRvc2lzID0gKChzdW0oeCRyLW1lYW4pXjQpL24pLygoc3VtKHgkci1tZWFuKV4yKS9uKV4oMikKICAgICAgICAgICAgICAgICAgIEpCID0gbiooKChza2V3bmVzc14yKS82KSsoKChrdXJ0b3Npcy0zKV4yKS8yNCkpCiAgICAgICAgICAgICAgICAgICB0ZXN0ID0gcGFzdGUoJ3AtdmFsdWUgPScsMSAtIHBjaGlzcShKQixkZiA9IDIpLGlmZWxzZSgxIC0gcGNoaXNxKEpCLGRmID0gMik8MC4wNSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICcsIFNlIHJlY2hhemEgSDAnLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJywgTm8gc2UgcmVjaGF6YSBIMCcpKQogICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgfQogICAgICApCiAgICB9CiAgfQogICNFbiBlbCBjYXNvIGRlIHF1ZSBsb3MgcmV0b3Jub3Mgc2VhbiBhcml0bWV0aWNvcyAKICBlbHNlIGlmIChyZXR1cm49PSdubycpewoKICAgIHJldG9ybm9zX2FyaXRtZXRpY29zIDwtIHggJT4lCiAgICAgIGdyb3VwX2J5KHN5bWJvbCkgJT4lCiAgICAgIHRxX3RyYW5zbXV0ZShzZWxlY3QgPSBhZGp1c3RlZCwKICAgICAgICAgICAgICAgICAgIG11dGF0ZV9mdW4gPSBwZXJpb2RSZXR1cm4sCiAgICAgICAgICAgICAgICAgICBwZXJpb2QgPSAibW9udGhseSIsCiAgICAgICAgICAgICAgICAgICB0eXBlID0gImFyaXRobWV0aWMiLAogICAgICAgICAgICAgICAgICAgY29sX3JlbmFtZSA9ICJyZSIpCiAgICAKICAgIGlmZWxzZShncmFwaD09J3R5cGUgMScsCiAgICAgICAgICAgKGdyYWZpY29fYXJpdG1ldGljbyA8LSByZXRvcm5vc19hcml0bWV0aWNvcyAlPiUKICAgICAgICAgICAgICBnZ3Bsb3QoYWVzKGRhdGUscmUpKSsKICAgICAgICAgICAgICBnZW9tX2xpbmUoKSArCiAgICAgICAgICAgICAgbGFicyh0aXRsZSA9ICJSZXRvcm5vcyBBY3Rpdm9zIiwKICAgICAgICAgICAgICAgICAgIHggPSAiUmV0b3Jub3MgbWVuc3VhbGVzIiwgeSA9ICJEZW5zaWRhZCIpICsKICAgICAgICAgICAgICB0aGVtZV9lY29ub21pc3Rfd2hpdGUoKSArCiAgICAgICAgICAgICAgZmFjZXRfd3JhcCh+IHN5bWJvbCwgbmNvbCA9IDIpKSkKICAgIGlmZWxzZShncmFwaD09J3R5cGUgMicsCiAgICAgICAgICAgICAgICAgIChncmFmaWNvX2FjdW11bGFkb19hcml0bWV0aWNvIDwtIHJldG9ybm9zX2FyaXRtZXRpY29zICU+JQogICAgICAgICAgICAgICAgICAgICBncm91cF9ieShzeW1ib2wpICU+JQogICAgICAgICAgICAgICAgICAgICBtdXRhdGUoYWN1bXVsYWRvID0gY3Vtc3VtKHJlKSkgICU+JQogICAgICAgICAgICAgICAgICAgICBnZ3Bsb3QoYWVzKGRhdGUsIGFjdW11bGFkbykpICsKICAgICAgICAgICAgICAgICAgICAgZ2VvbV9saW5lKCkgKwogICAgICAgICAgICAgICAgICAgICBsYWJzKHRpdGxlID0gIlJldG9ybm9zIEFjdGl2b3MiLAogICAgICAgICAgICAgICAgICAgICAgICAgIHggPSAiUGVyaW9kbyIsIHkgPSAiUmV0b3JubyBBY3VtdWxhZG8iKSArCiAgICAgICAgICAgICAgICAgICAgIHRoZW1lX2Vjb25vbWlzdCgpICsKICAgICAgICAgICAgICAgICAgICAgZmFjZXRfd3JhcCh+IHN5bWJvbCwgbmNvbCA9IDIpICsKICAgICAgICAgICAgICAgICAgICAgc2NhbGVfeV9jb250aW51b3VzKCkpKQogICAgCiAgfQogCiAgaWZlbHNlKHJldHVybj09InllcyImIGdyYXBoPT0ndHlwZSAxJyAmIG5vcm09PSJ5ZXMiLHJldHVybihsaXN0KGdyYWZpY29fbG9nLGpiX2xvZykpLAogICAgICAgICBpZmVsc2UocmV0dXJuPT0neWVzJyAmIGdyYXBoPT0ndHlwZSAyJyAmIG5vcm09PSJ5ZXMiLHJldHVybihsaXN0KGdyYWZpY29fYWN1bXVsYWRvX2xvZyxqYl9sb2cpKSkpCiAgCiAgCn0KCmZ1bmN0aW9uX2ZpbmFuY2UoYWNjaW9uZXMsInllcyIsInR5cGUgMSIsInllcyIpCiAKIApgYGAKI1BSRUdVTlRBIDMKCkVuIGVzdGUgY2FzbywgZWwgc2VzZ28gc2kgc2UgcHJlc2VudGEgeSBubyBkaXNtaW51eWUgYWwgYXVtZW50YXIgbGEgbXVlc3RyYSwgZXMgZGVjaXIsIGVzdGUgZXN0aW1hZG9yIGVzIHNlc2dhZG8gZSBpbmNvbnNpc3RlbnRlIGFsIGF1bWVudG8gZW4gZWwgdGFtYcOxbyBkZSBsYSBtdWVzdHJhIHBvciBsbyBxdWUgbm8gc2VyaWEgdW4gYnVlbiBlc3RpbWFkb3IgZGViaWRvIGEgcXVlIGVuIGxhIHJlZ3Jlc2lvbiBzZSBvbWl0ZSB1bmEgdmFyaWFibGUgcmVsZXZhbnRlIHF1ZSBjYXVzYSBlbCBwcmVvYmxlbWEgbWVuY2lvbmFkbyBhbnRlcmlybWV0ZS4gTWFudGVuaWVuZG8gbGEgZXN0aW1hY2lvbiBzZXNnYWRhIGNhc2kgY29uc3RhbnRlLCBjb21vIGVzIGVsIGNhc28gZGUgdW4gdGFtYcOxbyBkZSBtdWVzdHJhIDUwLCBlbCBlc3RpbWFkb3IgdG9tYSBlbCB2YWxvciBkZSAzLjIyNDAxOSwgZW4gY29tcGFyYWNpb24gY29uIGVsIHZhbG9yIHF1ZSB0b21hIGNvbiB1biB0YW1hw7FvIGRlIG11ZXN0cmEgMTAwMCBxdWUgZXMgZGUgMy4zMDA1MjksIG5vdGFuZGVzZSBjbGFyYW1lbnRlIHVuYSBwb2NhIHZhcmlhY2lvbi4KCkRlc2RlIFgxIGhhc3RhIFg0IHNlIGVuY3VlbnRyYW4gbG9zIHZhbG9yZXMgZGVsIGVzdGltYWRvciBiMSBTRVNHQURPIGNvbiB0YW1hw7FvcyBkZSBtdWVzdHJhIDUwLCAxMDAsIDUwMCB5IDEwMDAgcmVzcGVjdGl2YW1lbnRlLiBBbCBtaXNtbyB0aWVtcG8gZGVzZGUgWDUgaGFzdGEgWDggc29uIGxvcyB2YWxvcmVzIHF1ZSB0b21hIGVsIGVzdGltYWRvciBiMSBJTlNFU0dBRE8gcGFyYSBzdXMgcmVzcGVjdGl2b3MgdGFtYcOxb3MgZGUgbXVlc3RyYSwgZW4gZWwgbWlzbW8gb3JkZW4gcXVlIGVsIGVzdGltYWRvciBzZXNnYWRvLgoKVG9tYW5kbyBlbCB2YWxvciAyLjUwMDQ2MiAgY3VhbmRvIGVzdGUgZXMgaW5zZXNnYWRvLCBlcyBkZWNpciwgZXN0aW1hZG8gY29uc2lkZXJhbmRvIGxhIHZhcmlhYmxlIG9taXRpZGEsIGVuIGNvbXBhcmFjaW9uIGNvbiBlbCB2YWxvciAzLjMwMDUyOSBzZXNnYWRvIHBvc2l0aXZhbWVudGUgcXVlIHRvbWEgZWwgZXN0aW1hZG9yIGFsIG9taXRpciBsYSB2YXJpYWJsZS4gU2UgYXByZWNpYSB1bmEgZGlmZXJlbmNpYSBzaWduaWZpY2F0aXZhIGFsIGVzdGltYXJsbyBjb24gdW4gdGFtYcOxbyBkZSBtdWVzdHJhIDEwMDAsIGFsIGlndWFsIHF1ZSBjb24gbG9zIG90cm9zIHRhbWHDsW9zIGRlIGxhIG11ZXN0cmEuCgozLkEKYGBge3J9CnNldC5zZWVkKDEyMzQpClJlcCA9IDEwMDAwCmJldGFzID0gbWF0cml4KE5BICxucm93ID0gUmVwLCBuY29sID0gOCkKCmIwID0gMgpiMSA9IDIuNQpiMiA9IDEKCk4gPSBjKDUwLCAxMDAsIDUwMCwgMTAwMCkKCmZvciAoaiBpbiAxOmxlbmd0aChOKSl7CiAgeDEgPSBybm9ybShOW2pdLDIwLDEpCiAgeDIgPSAoMC44KngxKSArIHJub3JtKE5bal0sMCwxKQogIHgyLjIgPSBydW5pZihOW2pdLDAsMSkKCiAgZm9yIChpIGluIDE6UmVwKSB7CiAgICAKICAgIHUgPSBybm9ybShOW2pdLDAsMSkKICAgIHYgPSBiMip4MiArIHUKICAgIAogICAgWV9DT05fU0VTR08gPSBiMCArIGIxKngxICsgdgogICAgCiAgICBZX1NJTl9TRVNHTyA9IGIwICsgYjEqeDEgKyBiMip4MiArIHUKICAgIAogICAgUkVHUkVTSU9OX0NPTl9TRVNHTyA9IGxtKFlfQ09OX1NFU0dPIH4geDEpCiAgICAKICAgIGJldGFzW2ksal0gPSBSRUdSRVNJT05fQ09OX1NFU0dPJGNvZWZbMl0KCiAgICAKICAgIFJFR1JFU0lPTl9TSU5fU0VTR08gPSBsbShZX1NJTl9TRVNHTyB+IHgxICsgeDIpCiAgICAKICAgIGJldGFzW2ksais0XSA9IFJFR1JFU0lPTl9TSU5fU0VTR08kY29lZlsyXQogCiAgfQp9CgpiZXRhc19kYXRhID0gZGF0YS5mcmFtZShiZXRhcykKCmFwcGx5KGJldGFzX2RhdGEsIDIsIG1lYW4pCgpgYGAKCiNWQVJJQU5aQVMKYGBge3J9CmFwcGx5KGJldGFzX2RhdGEsIDIsIHZhcikKYGBgCgozLkIKYGBge3J9ClJFR181MF9TRVNHTyA9IGdncGxvdChiZXRhc19kYXRhKSArIAogIGdlb21faGlzdG9ncmFtKGFlcyhiZXRhc19kYXRhWywxXSx5PS4uZGVuc2l0eS4uKSwgY29sPSJibGFjayIsIGJpbnMgPSAzMCkgKwogIHN0YXRfZnVuY3Rpb24oZnVuID0gZG5vcm0sIGFyZ3MgPSBsaXN0KG1lYW49bWVhbihiZXRhc19kYXRhWywxXSksIHNkPXNkKGJldGFzX2RhdGFbLDFdKSksCiAgICAgICAgICAgICAgICBnZW9tID0gImxpbmUiLCBjb2xvcj0icmVkIiwgc2l6ZT0xKSArCiAgeWxhYigiRGVuc2lkYWQiKSArIGdndGl0bGUoIkRpc3RyaWJ1Y2lvbiBkZWwgZXN0aW1hZG9yIGIxIENPTiBTRVNHTyBjb24gTj01MCIpICt4bGFiKCJFc3RpbWFkb3IgYjEiKSArCiAgdGhlbWVfZWNvbm9taXN0X3doaXRlKCkKClJFR181MF9TRVNHTwoKYGBgCgoKYGBge3J9ClJFR181MF9TUyA9IGdncGxvdChiZXRhc19kYXRhKSArIAogIGdlb21faGlzdG9ncmFtKGFlcyhiZXRhc19kYXRhWyw1XSx5PS4uZGVuc2l0eS4uKSwgY29sPSJibGFjayIsIGJpbnMgPSAzMCkgKwogIHN0YXRfZnVuY3Rpb24oZnVuID0gZG5vcm0sIGFyZ3MgPSBsaXN0KG1lYW49bWVhbihiZXRhc19kYXRhWyw1XSksIHNkPXNkKGJldGFzX2RhdGFbLDVdKSksCiAgICAgICAgICAgICAgICBnZW9tID0gImxpbmUiLCBjb2xvcj0icmVkIiwgc2l6ZT0xKSArCiAgeWxhYigiRGVuc2lkYWQiKSArIGdndGl0bGUoIkRpc3RyaWJ1Y2lvbiBkZWwgZXN0aW1hZG9yIFNJTiBTRVNHTyBiMSBjb24gTj01MCIpICt4bGFiKCJFc3RpbWFkb3IgYjEiKSArCiAgdGhlbWVfZWNvbm9taXN0X3doaXRlKCkKClJFR181MF9TUwpgYGAKCmBgYHtyfQpSRUdfMTAwX0NTID0gZ2dwbG90KGJldGFzX2RhdGEpICsgCiAgZ2VvbV9oaXN0b2dyYW0oYWVzKGJldGFzX2RhdGFbLDJdLHk9Li5kZW5zaXR5Li4pLCBjb2w9ImJsYWNrIiwgYmlucyA9IDMwKSArCiAgc3RhdF9mdW5jdGlvbihmdW4gPSBkbm9ybSwgYXJncyA9IGxpc3QobWVhbj1tZWFuKGJldGFzX2RhdGFbLDJdKSwgc2Q9c2QoYmV0YXNfZGF0YVssMl0pKSwKICAgICAgICAgICAgICAgIGdlb20gPSAibGluZSIsIGNvbG9yPSJyZWQiLCBzaXplPTEpICsKICB5bGFiKCJEZW5zaWRhZCIpICsgZ2d0aXRsZSgiRGlzdHJpYnVjaW9uIGRlbCBlc3RpbWFkb3IgQ09OIFNFU0dPIGIxIGNvbiBOPTEwMCIpICt4bGFiKCJFc3RpbWFkb3IgYjEiKSArCiAgdGhlbWVfZWNvbm9taXN0X3doaXRlKCkKCgpSRUdfMTAwX0NTCmBgYAoKYGBge3J9ClJFR18xMDBfU1MgPSBnZ3Bsb3QoYmV0YXNfZGF0YSkgKyAKICBnZW9tX2hpc3RvZ3JhbShhZXMoYmV0YXNfZGF0YVssNl0seT0uLmRlbnNpdHkuLiksIGNvbD0iYmxhY2siLCBiaW5zID0gMzApICsKICBzdGF0X2Z1bmN0aW9uKGZ1biA9IGRub3JtLCBhcmdzID0gbGlzdChtZWFuPW1lYW4oYmV0YXNfZGF0YVssNl0pLCBzZD1zZChiZXRhc19kYXRhWyw2XSkpLAogICAgICAgICAgICAgICAgZ2VvbSA9ICJsaW5lIiwgY29sb3I9InJlZCIsIHNpemU9MSkgKwogIHlsYWIoIkRlbnNpZGFkIikgKyBnZ3RpdGxlKCJEaXN0cmlidWNpb24gZGVsIGVzdGltYWRvciBTSU4gU0VTR08gYjEgY29uIE49MTAwIikgK3hsYWIoIkVzdGltYWRvciBiMSIpICsKICB0aGVtZV9lY29ub21pc3Rfd2hpdGUoKQoKClJFR18xMDBfU1MKYGBgCgpgYGB7cn0KUkVHXzUwMF9DUyA9IGdncGxvdChiZXRhc19kYXRhKSArIAogIGdlb21faGlzdG9ncmFtKGFlcyhiZXRhc19kYXRhWywzXSx5PS4uZGVuc2l0eS4uKSwgY29sPSJibGFjayIsIGJpbnMgPSAzMCkgKwogIHN0YXRfZnVuY3Rpb24oZnVuID0gZG5vcm0sIGFyZ3MgPSBsaXN0KG1lYW49bWVhbihiZXRhc19kYXRhWywzXSksIHNkPXNkKGJldGFzX2RhdGFbLDNdKSksCiAgICAgICAgICAgICAgICBnZW9tID0gImxpbmUiLCBjb2xvcj0icmVkIiwgc2l6ZT0xKSArCiAgeWxhYigiRGVuc2lkYWQiKSArIGdndGl0bGUoIkRpc3RyaWJ1Y2lvbiBkZWwgZXN0aW1hZG9yIENPTiBTRVNHTyBiMSBjb24gTj01MDAiKSAreGxhYigiRXN0aW1hZG9yIGIxIikgKwogIHRoZW1lX2Vjb25vbWlzdF93aGl0ZSgpCgpSRUdfNTAwX0NTCmBgYAoKYGBge3J9ClJFR181MDBfU1MgPSBnZ3Bsb3QoYmV0YXNfZGF0YSkgKyAKICBnZW9tX2hpc3RvZ3JhbShhZXMoYmV0YXNfZGF0YVssN10seT0uLmRlbnNpdHkuLiksIGNvbD0iYmxhY2siLCBiaW5zID0gMzApICsKICBzdGF0X2Z1bmN0aW9uKGZ1biA9IGRub3JtLCBhcmdzID0gbGlzdChtZWFuPW1lYW4oYmV0YXNfZGF0YVssN10pLCBzZD1zZChiZXRhc19kYXRhWyw3XSkpLAogICAgICAgICAgICAgICAgZ2VvbSA9ICJsaW5lIiwgY29sb3I9InJlZCIsIHNpemU9MSkgKwogIHlsYWIoIkRlbnNpZGFkIikgKyBnZ3RpdGxlKCJEaXN0cmlidWNpb24gZGVsIGVzdGltYWRvciBTSU4gU0VTR08gYjEgY29uIE49NTAwIikgK3hsYWIoIkVzdGltYWRvciBiMSIpICsKICB0aGVtZV9lY29ub21pc3Rfd2hpdGUoKQoKUkVHXzUwMF9TUwpgYGAKCmBgYHtyfQpSRUdfMTAwMF9DUyA9IGdncGxvdChiZXRhc19kYXRhKSArIAogIGdlb21faGlzdG9ncmFtKGFlcyhiZXRhc19kYXRhWyw0XSx5PS4uZGVuc2l0eS4uKSwgY29sPSJibGFjayIsIGJpbnMgPSAzMCkgKwogIHN0YXRfZnVuY3Rpb24oZnVuID0gZG5vcm0sIGFyZ3MgPSBsaXN0KG1lYW49bWVhbihiZXRhc19kYXRhWyw0XSksIHNkPXNkKGJldGFzX2RhdGFbLDRdKSksCiAgICAgICAgICAgICAgICBnZW9tID0gImxpbmUiLCBjb2xvcj0icmVkIiwgc2l6ZT0xKSArCiAgeWxhYigiRGVuc2lkYWQiKSArZ2d0aXRsZSgiRGlzdHJpYnVjaW9uIGRlbCBlc3RpbWFkb3IgQ09OIFNFU0dPIGIxIGNvbiBOPTEwMDAiKSAreGxhYigiRXN0aW1hZG9yIGIxIikgKwogIHRoZW1lX2Vjb25vbWlzdF93aGl0ZSgpCgpSRUdfMTAwMF9DUwpgYGAKCmBgYHtyfQpSRUdfMTAwMF9TUyA9IGdncGxvdChiZXRhc19kYXRhKSArIAogIGdlb21faGlzdG9ncmFtKGFlcyhiZXRhc19kYXRhWyw4XSx5PS4uZGVuc2l0eS4uKSwgY29sPSJibGFjayIsIGJpbnMgPSAyNSkgKwogIHN0YXRfZnVuY3Rpb24oZnVuID0gZG5vcm0sIGFyZ3MgPSBsaXN0KG1lYW49bWVhbihiZXRhc19kYXRhWyw4XSksIHNkPXNkKGJldGFzX2RhdGFbLDhdKSksCiAgICAgICAgICAgICAgICBnZW9tID0gImxpbmUiLCBjb2xvcj0icmVkIiwgc2l6ZT0xKSArCiAgeWxhYigiRGVuc2lkYWQiKSArZ2d0aXRsZSgiRGlzdHJpYnVjaW9uIGRlbCBlc3RpbWFkb3IgU0lOIFNFU0dPIGIxIGNvbiBOPTEwMDAiKSAreGxhYigiRXN0aW1hZG9yIGIxIikgKwogIHRoZW1lX2Vjb25vbWlzdF93aGl0ZSgpCgpSRUdfMTAwMF9TUwpgYGAKCjMuQwoKRW4gZWwgY2FzbyBxdWUgeDIg4oi8IFUgWzAsIDFdIGFtYm9zIG1vZGVsb3MsIHRhbnRvIGVsIGNvcnJlY3RhbWVudGUgZXNwZWNpZmljYWRvIGNvbW8gZWwgcXVlIG1hbnRpZW5lIHVuYSB2YXJpYWJsZSBvbWl0aWRhIHJlbGV2YW50ZSwgY29udmVyZ2VuIGFsIHZhbG9yIHBvYmxhY2lvbmFsIGRlIDIuNSwgcG9yIGxvIHF1ZSBjb24gZXN0ZSB0aXBvIGRlIGRpc3RyaWJ1Y2lvbiBzZSBwb2RyaWEgY29uY2x1aXIgcXVlIGxvcyByZXN1bHRhZG9zIG5vIHByZXNlbnRhbiBzZXNnbyBhIHNpbXBsZSB2aXN0YS4KCmBgYHtyfQpzZXQuc2VlZCgxMjM0KQpSZXAgPSAxMDAwMApiZXRhcyA9IG1hdHJpeChOQSAsbnJvdyA9IFJlcCwgbmNvbCA9IDgpCgpiMCA9IDIKYjEgPSAyLjUKYjIgPSAxCgpOID0gYyg1MCwgMTAwLCA1MDAsIDEwMDApCgpmb3IgKGogaW4gMTpsZW5ndGgoTikpewogIHgxID0gcm5vcm0oTltqXSwyMCwxKQogIHgyID0gcnVuaWYoTltqXSwwLDEpCiAgeDIuMiA9ICgwLjgqeDEpICsgcm5vcm0oTltqXSwwLDEpCgogIGZvciAoaSBpbiAxOlJlcCkgewogICAgCiAgICB1ID0gcm5vcm0oTltqXSwwLDEpCiAgICB2ID0gYjIqeDIgKyB1CiAgICAKICAgIFlfQ09OX1NFU0dPID0gYjAgKyBiMSp4MSArIHYKICAgIAogICAgWV9TSU5fU0VTR08gPSBiMCArIGIxKngxICsgYjIqeDIgKyB1CiAgICAKICAgIFJFR1JFU0lPTl9DT05fU0VTR08gPSBsbShZX0NPTl9TRVNHTyB+IHgxKQogICAgCiAgICBiZXRhc1tpLGpdID0gUkVHUkVTSU9OX0NPTl9TRVNHTyRjb2VmWzJdCgogICAgCiAgICBSRUdSRVNJT05fU0lOX1NFU0dPID0gbG0oWV9TSU5fU0VTR08gfiB4MSArIHgyKQogICAgCiAgICBiZXRhc1tpLGorNF0gPSBSRUdSRVNJT05fU0lOX1NFU0dPJGNvZWZbMl0KIAogIH0KfQoKYmV0YXNfZGF0YV91bmlmID0gZGF0YS5mcmFtZShiZXRhcykKCmFwcGx5KGJldGFzX2RhdGFfdW5pZiwgMiwgbWVhbikKYGBgCgpgYGB7cn0KYXBwbHkoYmV0YXNfZGF0YV91bmlmLCAyLCB2YXIpCmBgYAoKR1JBRklDT1MgQ09OIHgyIOKIvCBVIFswLCAxXQoKUG9yIGVsIGxhZG8gZGUgbG9zIGdyYWZpY29zLCBlc3RvcyBtdWVzdHJhbiBxdWUgbGEgbWVkaWEgZGVsIGNvZWZpY2llbnRlIGIxIHNlIGVuY3VlbnRyYSBtw6FzIGNlbnRyYWRvIGVuIDIuNSwgcGFyYSB0b2RvcyBsb3MgdGFtYcOxb3MgZGUgbGEgbXVlc3RyYS4gQWx0ZXJuYXRpdmFtZW50ZSwgbGFzIHZhcmlhbnphcyBkZSBsYXMgZXN0aW1hc2lvbmVzIHNlc2dhZGFzIHNlIG1hbnRpZW5lbiBjb25zdGFudGVzIGVuIHN1IHRvdGFsaWRhcywgc2luIGV4aXN0aXIgdmFyaWFjaW9uIGFsZ3VuYS4KCmBgYHtyfQpSRUdfVV81MF9DUyA9IGdncGxvdChiZXRhc19kYXRhX3VuaWYpICsgCiAgZ2VvbV9oaXN0b2dyYW0oYWVzKGJldGFzX2RhdGFfdW5pZlssMV0seT0uLmRlbnNpdHkuLiksIGNvbD0iYmxhY2siLCBiaW5zID0gMzApICsKICBzdGF0X2Z1bmN0aW9uKGZ1biA9IGRub3JtLCBhcmdzID0gbGlzdChtZWFuPW1lYW4oYmV0YXNfZGF0YV91bmlmWywxXSksIHNkPXNkKGJldGFzX2RhdGFfdW5pZlssMV0pKSwKICAgICAgICAgICAgICAgIGdlb20gPSAibGluZSIsIGNvbG9yPSJyZWQiLCBzaXplPTEpICsKICB5bGFiKCJEZW5zaWRhZCIpICsgZ2d0aXRsZSgiRGlzdHJpYnVjaW9uIGRlbCBlc3RpbWFkb3IgQ09OIFNFU0dPIGIxIGNvbiBOPTUwIiwgc3VidGl0bGUgPSJjb24gIHgyIOKIvCBVIFswLCAxXSIpICt4bGFiKCJFc3RpbWFkb3IgYjEiKSArCiAgdGhlbWVfZWNvbm9taXN0X3doaXRlKCkKClJFR19VXzUwX0NTCmBgYAoKYGBge3J9ClJFR19VXzUwX1NTID0gZ2dwbG90KGJldGFzX2RhdGFfdW5pZikgKyAKICBnZW9tX2hpc3RvZ3JhbShhZXMoYmV0YXNfZGF0YV91bmlmWyw1XSx5PS4uZGVuc2l0eS4uKSwgY29sPSJibGFjayIsIGJpbnMgPSAzMCkgKwogIHN0YXRfZnVuY3Rpb24oZnVuID0gZG5vcm0sIGFyZ3MgPSBsaXN0KG1lYW49bWVhbihiZXRhc19kYXRhX3VuaWZbLDVdKSwgc2Q9c2QoYmV0YXNfZGF0YV91bmlmWyw1XSkpLAogICAgICAgICAgICAgICAgZ2VvbSA9ICJsaW5lIiwgY29sb3I9InJlZCIsIHNpemU9MSkgKwogIHlsYWIoIkRlbnNpZGFkIikgKyBnZ3RpdGxlKCJEaXN0cmlidWNpb24gZGVsIGVzdGltYWRvciBTSU4gU0VTR08gYjEgY29uIE49NTAiLCBzdWJ0aXRsZSA9ImNvbiAgeDIg4oi8IFUgWzAsIDFdIikgK3hsYWIoIkVzdGltYWRvciBiMSIpICsKICB0aGVtZV9lY29ub21pc3Rfd2hpdGUoKQoKUkVHX1VfNTBfU1MKYGBgCgpgYGB7cn0KUkVHX1VfMTAwX0NTID0gZ2dwbG90KGJldGFzX2RhdGFfdW5pZikgKyAKICBnZW9tX2hpc3RvZ3JhbShhZXMoYmV0YXNfZGF0YV91bmlmWywyXSx5PS4uZGVuc2l0eS4uKSwgY29sPSJibGFjayIsIGJpbnMgPSAzMCkgKwogIHN0YXRfZnVuY3Rpb24oZnVuID0gZG5vcm0sIGFyZ3MgPSBsaXN0KG1lYW49bWVhbihiZXRhc19kYXRhX3VuaWZbLDJdKSwgc2Q9c2QoYmV0YXNfZGF0YV91bmlmWywyXSkpLAogICAgICAgICAgICAgICAgZ2VvbSA9ICJsaW5lIiwgY29sb3I9InJlZCIsIHNpemU9MSkgKwogIHlsYWIoIkRlbnNpZGFkIikgKyBnZ3RpdGxlKCJEaXN0cmlidWNpb24gZGVsIGVzdGltYWRvciBDT04gU0VTR08gYjEgY29uIE49MTAwIiwgc3VidGl0bGUgPSJjb24gIHgyIOKIvCBVIFswLCAxXSIpICt4bGFiKCJFc3RpbWFkb3IgYjEiKSArCiAgdGhlbWVfZWNvbm9taXN0X3doaXRlKCkKCgpSRUdfVV8xMDBfQ1MKYGBgCgpgYGB7cn0KUkVHX1VfMTAwX1NTID0gZ2dwbG90KGJldGFzX2RhdGFfdW5pZikgKyAKICBnZW9tX2hpc3RvZ3JhbShhZXMoYmV0YXNfZGF0YV91bmlmWyw2XSx5PS4uZGVuc2l0eS4uKSwgY29sPSJibGFjayIsIGJpbnMgPSAyNSkgKwogIHN0YXRfZnVuY3Rpb24oZnVuID0gZG5vcm0sIGFyZ3MgPSBsaXN0KG1lYW49bWVhbihiZXRhc19kYXRhX3VuaWZbLDZdKSwgc2Q9c2QoYmV0YXNfZGF0YV91bmlmWyw2XSkpLAogICAgICAgICAgICAgICAgZ2VvbSA9ICJsaW5lIiwgY29sb3I9InJlZCIsIHNpemU9MSkgKwogIHlsYWIoIkRlbnNpZGFkIikgKyBnZ3RpdGxlKCJEaXN0cmlidWNpb24gZGVsIGVzdGltYWRvciBTSU4gU0VTR08gYjEgY29uIE49MTAwIiwgc3VidGl0bGUgPSJjb24gIHgyIOKIvCBVIFswLCAxXSIpICt4bGFiKCJFc3RpbWFkb3IgYjEiKSArCiAgdGhlbWVfZWNvbm9taXN0X3doaXRlKCkKCgpSRUdfVV8xMDBfU1MKYGBgCgoKYGBge3J9ClJFR19VXzUwMF9DUyA9IGdncGxvdChiZXRhc19kYXRhX3VuaWYpICsgCiAgZ2VvbV9oaXN0b2dyYW0oYWVzKGJldGFzX2RhdGFfdW5pZlssM10seT0uLmRlbnNpdHkuLiksIGNvbD0iYmxhY2siLCBiaW5zID0gMzApICsKICBzdGF0X2Z1bmN0aW9uKGZ1biA9IGRub3JtLCBhcmdzID0gbGlzdChtZWFuPW1lYW4oYmV0YXNfZGF0YV91bmlmWywzXSksIHNkPXNkKGJldGFzX2RhdGFfdW5pZlssM10pKSwKICAgICAgICAgICAgICAgIGdlb20gPSAibGluZSIsIGNvbG9yPSJyZWQiLCBzaXplPTEpICsKICB5bGFiKCJEZW5zaWRhZCIpICsgZ2d0aXRsZSgiRGlzdHJpYnVjaW9uIGRlbCBlc3RpbWFkb3IgQ09OIFNFU0dPIGIxIGNvbiBOPTUwMCIsIHN1YnRpdGxlID0iY29uICB4MiDiiLwgVSBbMCwgMV0iKSAreGxhYigiRXN0aW1hZG9yIGIxIikgKwogIHRoZW1lX2Vjb25vbWlzdF93aGl0ZSgpCgpSRUdfVV81MDBfQ1MKYGBgCgpgYGB7cn0KUkVHX1VfNTAwX1NTID0gZ2dwbG90KGJldGFzX2RhdGFfdW5pZikgKyAKICBnZW9tX2hpc3RvZ3JhbShhZXMoYmV0YXNfZGF0YV91bmlmWyw3XSx5PS4uZGVuc2l0eS4uKSwgY29sPSJibGFjayIsIGJpbnMgPSAzMCkgKwogIHN0YXRfZnVuY3Rpb24oZnVuID0gZG5vcm0sIGFyZ3MgPSBsaXN0KG1lYW49bWVhbihiZXRhc19kYXRhX3VuaWZbLDddKSwgc2Q9c2QoYmV0YXNfZGF0YV91bmlmWyw3XSkpLAogICAgICAgICAgICAgICAgZ2VvbSA9ICJsaW5lIiwgY29sb3I9InJlZCIsIHNpemU9MSkgKwogIHlsYWIoIkRlbnNpZGFkIikgKyBnZ3RpdGxlKCJEaXN0cmlidWNpb24gZGVsIGVzdGltYWRvciBTSU4gU0VTR08gYjEgY29uIE49NTAwIiwgc3VidGl0bGUgPSJjb24gIHgyIOKIvCBVIFswLCAxXSIpICt4bGFiKCJFc3RpbWFkb3IgYjEiKSArCiAgdGhlbWVfZWNvbm9taXN0X3doaXRlKCkKClJFR19VXzUwMF9TUwoKYGBgCgpgYGB7cn0KUkVHX1VfMTAwMF9DUyA9IGdncGxvdChiZXRhc19kYXRhX3VuaWYpICsgCiAgZ2VvbV9oaXN0b2dyYW0oYWVzKGJldGFzX2RhdGFfdW5pZlssNF0seT0uLmRlbnNpdHkuLiksIGNvbD0iYmxhY2siLCBiaW5zID0gMjUpICsKICBzdGF0X2Z1bmN0aW9uKGZ1biA9IGRub3JtLCBhcmdzID0gbGlzdChtZWFuPW1lYW4oYmV0YXNfZGF0YV91bmlmWyw0XSksIHNkPXNkKGJldGFzX2RhdGFfdW5pZlssNF0pKSwKICAgICAgICAgICAgICAgIGdlb20gPSAibGluZSIsIGNvbG9yPSJyZWQiLCBzaXplPTEpICsKICB5bGFiKCJEZW5zaWRhZCIpICtnZ3RpdGxlKCJEaXN0cmlidWNpb24gZGVsIGVzdGltYWRvciBDT04gU0VTR08gYjEgY29uIE49MTAwMCIsIHN1YnRpdGxlID0iY29uICB4MiDiiLwgVSBbMCwgMV0iKSAreGxhYigiRXN0aW1hZG9yIGIxIikgKwogIHRoZW1lX2Vjb25vbWlzdF93aGl0ZSgpCgpSRUdfVV8xMDAwX0NTCmBgYAoKYGBge3J9ClJFR19VXzEwMDBfU1MgPSBnZ3Bsb3QoYmV0YXNfZGF0YV91bmlmKSArIAogIGdlb21faGlzdG9ncmFtKGFlcyhiZXRhc19kYXRhX3VuaWZbLDhdLHk9Li5kZW5zaXR5Li4pLCBjb2w9ImJsYWNrIiwgYmlucyA9IDI1KSArCiAgc3RhdF9mdW5jdGlvbihmdW4gPSBkbm9ybSwgYXJncyA9IGxpc3QobWVhbj1tZWFuKGJldGFzX2RhdGFfdW5pZlssOF0pLCBzZD1zZChiZXRhc19kYXRhX3VuaWZbLDhdKSksCiAgICAgICAgICAgICAgICBnZW9tID0gImxpbmUiLCBjb2xvcj0icmVkIiwgc2l6ZT0xKSArCiAgeWxhYigiRGVuc2lkYWQiKSArZ2d0aXRsZSgiRGlzdHJpYnVjaW9uIGRlbCBlc3RpbWFkb3IgU0lOIFNFU0dPIGIxIGNvbiBOPTEwMDAiLCBzdWJ0aXRsZSA9ImNvbiAgeDIg4oi8IFUgWzAsIDFdIikgK3hsYWIoIkVzdGltYWRvciBiMSIpICsKICB0aGVtZV9lY29ub21pc3Rfd2hpdGUoKQoKUkVHX1VfMTAwMF9TUwpgYGAKCg==</div>
 
 
 
